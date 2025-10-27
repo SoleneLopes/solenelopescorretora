@@ -43,7 +43,7 @@
           </a>
         </div>
         <div class="lg:w-1/2">
-          <img src="assets/familia.jpg" alt="Família saudável" class="rounded-2xl shadow-2xl" />
+          <img src="assets/familia.png" alt="Família saudável" class="rounded-2xl shadow-2xl" />
         </div>
       </div>
     </section>
@@ -127,43 +127,132 @@
             >Fale pelo WhatsApp</a
           >
         </div>
+
+        <!-- FORM AQUI -->
         <div class="lg:w-1/2 bg-white text-gray-800 p-8 rounded-xl shadow-xl">
-          <h3 class="text-2xl font-bold mb-6 text-primary">Solicite sua Cotação</h3>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
-            <input
-              type="text"
-              name="nome"
-              placeholder="Seu nome completo"
-              class="w-full p-4 border rounded-lg"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Seu melhor e-mail"
-              class="w-full p-4 border rounded-lg"
-              required
-            />
-            <input
-              type="tel"
-              name="telefone"
-              placeholder="Seu telefone"
-              class="w-full p-4 border rounded-lg"
-              required
-            />
-            <textarea
-              name="mensagem"
-              placeholder="Conte-nos sobre suas necessidades..."
-              rows="4"
-              class="w-full p-4 border rounded-lg"
-              required
-            ></textarea>
-            <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg hover:bg-blue-700">
-              Enviar Solicitação
+          <form id="contact-form" action="https://formspree.io/f/movpjyej" method="POST" class="space-y-4" novalidate>
+            <!-- Honeypot (anti-spam) -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+            <!-- Metadados úteis no e-mail -->
+            <input type="hidden" name="_subject" value="Nova solicitação de cotação - Site" />
+            <input type="hidden" name="_template" value="table" />
+
+            <label class="block">
+              <span class="block text-sm font-medium text-gray-700">Nome</span>
+              <input
+                type="text"
+                name="nome"
+                placeholder="Seu nome completo"
+                required
+                minlength="3"
+                class="mt-1 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
+                autocomplete="name"
+                aria-required="true"
+              />
+            </label>
+
+            <label class="block">
+              <span class="block text-sm font-medium text-gray-700">E-mail</span>
+              <input
+                type="email"
+                name="email"
+                placeholder="seu@email.com"
+                required
+                class="mt-1 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
+                autocomplete="email"
+                aria-required="true"
+              />
+            </label>
+
+            <label class="block">
+              <span class="block text-sm font-medium text-gray-700">Telefone</span>
+              <input
+                type="tel"
+                name="telefone"
+                placeholder="(11) 9 6228-6674"
+                inputmode="tel"
+                pattern="^\(?\d{2}\)?\s?9?\s?\d{4}-?\d{4}$"
+                class="mt-1 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
+                autocomplete="tel"
+              />
+            </label>
+
+            <label class="block">
+              <span class="block text-sm font-medium text-gray-700">Mensagem</span>
+              <textarea
+                name="mensagem"
+                placeholder="Conte rapidamente o que você precisa (plano individual, familiar ou empresarial)."
+                rows="4"
+                required
+                class="mt-1 w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] resize-y"
+                aria-required="true"
+              ></textarea>
+            </label>
+
+            <button
+              id="submit-btn"
+              type="submit"
+              class="w-full bg-[#059669] hover:bg-green-600 text-white font-bold py-3 rounded-lg transition"
+            >
+              Enviar solicitação
             </button>
+
+            <!-- mensagens -->
+            <p id="form-success" class="hidden text-green-700 bg-green-50 border border-green-200 rounded-lg p-3">
+              Obrigado! Recebemos sua mensagem e retornaremos em breve.
+            </p>
+            <p id="form-error" class="hidden text-red-700 bg-red-50 border border-red-200 rounded-lg p-3">
+              Ocorreu um erro ao enviar. Tente novamente em instantes.
+            </p>
           </form>
         </div>
       </div>
+
+      <script>
+        // envio sem recarregar a página
+        (function () {
+          const form = document.getElementById('contact-form');
+          const btn = document.getElementById('submit-btn');
+          const okMsg = document.getElementById('form-success');
+          const errMsg = document.getElementById('form-error');
+
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            okMsg.classList.add('hidden');
+            errMsg.classList.add('hidden');
+
+            if (!form.checkValidity()) {
+              form.reportValidity();
+              return;
+            }
+
+            btn.disabled = true;
+            const original = btn.textContent;
+            btn.textContent = 'Enviando...';
+
+            try {
+              const res = await fetch(form.action, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: new FormData(form),
+              });
+
+              if (res.ok) {
+                form.reset();
+                okMsg.classList.remove('hidden');
+              } else {
+                errMsg.classList.remove('hidden');
+              }
+            } catch (err) {
+              errMsg.classList.remove('hidden');
+            } finally {
+              btn.textContent = original;
+              btn.disabled = false;
+            }
+          });
+        })();
+      </script>
     </section>
 
     <!-- Footer -->
@@ -174,6 +263,27 @@
     <script src="script.js"></script>
     <script>
       feather.replace();
+    </script>
+    <!-- Botão voltar ao topo -->
+    <button
+      id="backToTop"
+      class="hidden fixed bottom-6 right-6 bg-green-600 hover:bg-green-800 text-white p-3 rounded-full shadow-lg transition"
+    >
+      ↑
+    </button>
+
+    <script>
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+          backToTop.classList.remove('hidden');
+        } else {
+          backToTop.classList.add('hidden');
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     </script>
   </body>
 </html>
