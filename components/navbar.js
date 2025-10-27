@@ -1,88 +1,104 @@
+// components/navbar.js
 class CustomNavbar extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
-
     this.shadowRoot.innerHTML = `
       <style>
+        :host { all: initial; display:block; }
+
+        /* HEADER */
         nav {
           background: #1e3a8a;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          display: grid;
+          grid-template-columns: auto 1fr auto auto;
           align-items: center;
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-        }
-        .logo img {
-          height: 45px;
-        }
-        .menu-desktop {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-        }
-        ul {
-          display: flex;
-          gap: 2rem;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-        a {
-          color: white;
-          text-decoration: none;
-          font-weight: 500;
-        }
-        a:hover { opacity: 0.8; }
-        .cta {
-          color: white;
-          background: #059669;
-          padding: 0.5rem 1rem;
-          border-radius: 6px;
-          font-size: 0.9rem;
-          font-weight: bold;
-        }
-        .mobile-menu-btn {
-          display: none;
-          cursor: pointer;
-          width: 30px;
-          height: 24px;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-        .mobile-menu-btn span {
-          display: block;
-          height: 3px;
-          background: white;
-          border-radius: 2px;
-          transition: all 0.3s ease;
-        }
-        .mobile-nav {
-          display: none;
-          flex-direction: column;
           gap: 1rem;
-          background: #1e40af;
-          padding: 1rem;
-          position: absolute;
-          top: 64px;
-          left: 0;
-          width: 100%;
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          z-index: 1000;
+          box-shadow: 0 4px 16px rgba(0,0,0,.15);
         }
-        .mobile-nav.active {
-          display: flex;
+        .logo img { height: 42px; display:block; }
+
+        /* MENU DESKTOP CENTRALIZADO */
+        .menu-desktop {
+          display:flex; justify-content:center; align-items:center;
         }
-        @media (max-width: 768px) {
-          .menu-desktop, .cta { display: none; }
-          .mobile-menu-btn { display: flex; }
+        .menu-desktop ul {
+          display:flex; gap:2rem; list-style:none; margin:0; padding:0;
+        }
+        .menu-desktop a {
+          color:#fff; text-decoration:none; font: 500 15px/1.2 system-ui, -apple-system, "Inter", sans-serif;
+          padding: .5rem 0;
+        }
+        .menu-desktop a:hover { opacity:.85; }
+
+        /* CTA à direita */
+        .cta {
+          color:#fff; background:#059669; text-decoration:none;
+          padding:.55rem .9rem; border-radius:8px; font:700 14px/1 system-ui, "Inter", sans-serif;
+          transition:.2s;
+        }
+        .cta:hover { filter:brightness(1.05); }
+
+        /* HAMBÚRGUER */
+        .hamburger {
+          width:32px; height:24px; display:none; cursor:pointer;
+          position:relative; justify-self:end;
+        }
+        .bar {
+          position:absolute; left:0; right:0; height:3px; background:#fff; border-radius:2px;
+          transition: transform .25s ease, opacity .2s ease, top .25s ease;
+        }
+        .bar:nth-child(1){ top:0; }
+        .bar:nth-child(2){ top:10.5px; }
+        .bar:nth-child(3){ top:21px; }
+        .hamburger.open .bar:nth-child(1){ top:10.5px; transform:rotate(45deg); }
+        .hamburger.open .bar:nth-child(2){ opacity:0; }
+        .hamburger.open .bar:nth-child(3){ top:10.5px; transform:rotate(-45deg); }
+
+        /* OVERLAY MOBILE (FULLSCREEN) */
+        .overlay {
+          position: fixed;
+          inset: 56px 0 0 0; /* abaixo do header (aprox 56px) */
+          background: linear-gradient(180deg,#1e3a8a 0%, #1e40af 60%, #1d4ed8 100%);
+          display:none;
+          flex-direction:column;
+          padding: 12px 16px 24px;
+          overflow:auto;
+          z-index: 999; /* logo abaixo do nav */
+        }
+        .overlay.open { display:flex; }
+
+        .mobile-list { list-style:none; margin:0; padding:8px 0; }
+        .mobile-item a{
+          display:block;
+          color:#fff; text-decoration:none;
+          padding:14px 10px;
+          font: 500 16px/1.2 system-ui, "Inter", sans-serif;
+          border-bottom:1px solid rgba(255,255,255,.08);
+        }
+        .mobile-cta {
+          margin-top:16px;
+          align-self:flex-start;
+          background:#059669;
+          color:#fff; text-decoration:none;
+          padding:.75rem 1rem; border-radius:10px; font:700 15px/1 system-ui, "Inter", sans-serif;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px){
+          .menu-desktop, .cta { display:none; }
+          .hamburger { display:block; }
+          nav { grid-template-columns: auto 1fr auto; }
         }
       </style>
 
+      <!-- HEADER -->
       <nav>
         <div class="logo">
-          <img src="assets/logo.png" alt="Solene Lopes Corretora">
+          <img src="assets/logo.png" alt="Solene Lopes - Corretora de Saúde e Odonto">
         </div>
 
         <div class="menu-desktop">
@@ -94,36 +110,53 @@ class CustomNavbar extends HTMLElement {
           </ul>
         </div>
 
-        <a href="https://wa.me/5511962286674" class="cta">WhatsApp</a>
+        <a class="cta" href="https://wa.me/5511962286674" rel="noopener" target="_blank">WhatsApp</a>
 
-        <!-- Botão Mobile -->
-        <div class="mobile-menu-btn" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
+        <!-- Botão hamburguer -->
+        <div class="hamburger" id="btnHam" aria-label="Abrir menu" aria-expanded="false" role="button">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </div>
       </nav>
 
-      <!-- Menu Mobile -->
-      <div class="mobile-nav" id="mobileNav">
-        <a href="#inicio">Início</a>
-        <a href="#beneficios">Benefícios</a>
-        <a href="#planos">Planos</a>
-        <a href="#contato">Contato</a>
-        <a href="https://wa.me/5511962286674" class="cta">WhatsApp</a>
+      <!-- OVERLAY MOBILE -->
+      <div class="overlay" id="overlay">
+        <ul class="mobile-list">
+          <li class="mobile-item"><a href="#inicio">Início</a></li>
+          <li class="mobile-item"><a href="#beneficios">Benefícios</a></li>
+          <li class="mobile-item"><a href="#planos">Planos</a></li>
+          <li class="mobile-item"><a href="#contato">Contato</a></li>
+        </ul>
+        <a class="mobile-cta" href="https://wa.me/5511962286674" rel="noopener" target="_blank">Falar no WhatsApp</a>
       </div>
     `;
 
-    // 🔹 O listener agora é adicionado AQUI (fora do innerHTML)
-    const btn = this.shadowRoot.querySelector('#hamburger');
-    const mobileNav = this.shadowRoot.querySelector('#mobileNav');
+    // JS – toggle do menu + trava scroll da página
+    const btn = this.shadowRoot.getElementById('btnHam');
+    const overlay = this.shadowRoot.getElementById('overlay');
 
-    if (btn) {
-      btn.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-      });
-    }
+    const toggleMenu = (open) => {
+      if (open) {
+        btn.classList.add('open');
+        overlay.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        document.documentElement.style.overflow = 'hidden'; // trava scroll
+      } else {
+        btn.classList.remove('open');
+        overlay.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        document.documentElement.style.overflow = ''; // libera scroll
+      }
+    };
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.classList.contains('open');
+      toggleMenu(!isOpen);
+    });
+
+    // Fecha ao clicar em qualquer link do overlay
+    this.shadowRoot.querySelectorAll('.mobile-item a').forEach((a) => {
+      a.addEventListener('click', () => toggleMenu(false));
+    });
   }
 }
-
 customElements.define('custom-navbar', CustomNavbar);
