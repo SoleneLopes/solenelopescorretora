@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solene Lopes - Corretora de Saúde e Odonto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1e3a8a',
+              secondary: '#059669',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+    <custom-navbar></custom-navbar>
+
+    <!-- Hero -->
+    <section id="inicio" class="bg-gradient-to-r from-primary to-blue-800 text-white py-24 mt-16">
+      <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0">
+          <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">Cuidar de você é o nosso melhor plano</h1>
+          <p class="text-lg text-blue-100 mb-8">
+            Soluções em planos de saúde e odontológicos para você, sua família e sua empresa.
+          </p>
+          <a
+            href="#contato"
+            class="bg-secondary hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition"
+          >
+            Solicitar Cotação
+          </a>
+        </div>
+        <div class="lg:w-1/2">
+          <img src="assets/familia.jpg" alt="Família saudável" class="rounded-2xl shadow-2xl" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Por que escolher nossa assessoria?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-md">
+            <i data-feather="user-check" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+            <h3 class="font-bold mb-2">Atendimento Personalizado</h3>
+            <p>Consultoria feita sob medida para seu perfil.</p>
+          </div>
+          <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-md">
+            <i data-feather="layers" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+            <h3 class="font-bold mb-2">Comparação Inteligente</h3>
+            <p>Acesso às principais operadoras com análise completa.</p>
+          </div>
+          <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-md">
+            <i data-feather="dollar-sign" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+            <h3 class="font-bold mb-2">Economia Garantida</h3>
+            <p>Planos com o melhor custo-benefício.</p>
+          </div>
+          <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-md">
+            <i data-feather="shield" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+            <h3 class="font-bold mb-2">Segurança Total</h3>
+            <p>Suporte em todas as etapas do processo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="py-20 bg-gray-100">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Nossos Planos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:scale-105 transition">
+            <h3 class="text-2xl font-bold text-primary mb-4">Individual</h3>
+            <ul class="space-y-3 mb-6">
+              <li>✔ Consultas médicas</li>
+              <li>✔ Exames laboratoriais</li>
+              <li>✔ Urgência e emergência</li>
+            </ul>
+            <a href="#contato" class="block text-center bg-primary text-white py-3 rounded-lg">Solicitar Cotação</a>
+          </div>
+          <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-secondary hover:scale-105 transition">
+            <h3 class="text-2xl font-bold text-secondary mb-4">Familiar</h3>
+            <ul class="space-y-3 mb-6">
+              <li>✔ Todos os benefícios do Individual</li>
+              <li>✔ Plano Odontológico incluso</li>
+              <li>✔ Descontos para dependentes</li>
+            </ul>
+            <a href="#contato" class="block text-center bg-secondary text-white py-3 rounded-lg">Solicitar Cotação</a>
+          </div>
+          <div class="bg-white p-8 rounded-xl shadow-lg hover:scale-105 transition">
+            <h3 class="text-2xl font-bold text-primary mb-4">Empresarial</h3>
+            <ul class="space-y-3 mb-6">
+              <li>✔ Planos coletivos</li>
+              <li>✔ Redução de custos</li>
+              <li>✔ Gestão simplificada</li>
+            </ul>
+            <a href="#contato" class="block text-center bg-primary text-white py-3 rounded-lg">Solicitar Cotação</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 bg-gradient-to-r from-primary to-blue-900 text-white">
+      <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-8">
+          <h2 class="text-3xl font-bold mb-4">Entre em Contato</h2>
+          <p class="mb-6">Consultora: <span class="font-bold">Solene Lopes</span></p>
+          <p class="mb-2">📱 (11) 96228-6674</p>
+          <p class="mb-2">🌐 solenelopescorretora.com.br</p>
+          <a
+            href="https://wa.me/5511962286674"
+            class="inline-block mt-4 bg-secondary px-6 py-3 rounded-lg font-bold hover:bg-green-600"
+            >Fale pelo WhatsApp</a
+          >
+        </div>
+        <div class="lg:w-1/2 bg-white text-gray-800 p-8 rounded-xl shadow-xl">
+          <h3 class="text-2xl font-bold mb-6 text-primary">Solicite sua Cotação</h3>
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+            <input
+              type="text"
+              name="nome"
+              placeholder="Seu nome completo"
+              class="w-full p-4 border rounded-lg"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Seu melhor e-mail"
+              class="w-full p-4 border rounded-lg"
+              required
+            />
+            <input
+              type="tel"
+              name="telefone"
+              placeholder="Seu telefone"
+              class="w-full p-4 border rounded-lg"
+              required
+            />
+            <textarea
+              name="mensagem"
+              placeholder="Conte-nos sobre suas necessidades..."
+              rows="4"
+              class="w-full p-4 border rounded-lg"
+              required
+            ></textarea>
+            <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg hover:bg-blue-700">
+              Enviar Solicitação
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <custom-footer></custom-footer>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
