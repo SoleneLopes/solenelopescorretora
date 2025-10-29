@@ -19,7 +19,16 @@ class CustomNavbar extends HTMLElement {
           z-index: 1000;
           box-shadow: 0 4px 16px rgba(0,0,0,.15);
         }
-        .logo img { height: 42px; display:block; }
+
+        /* LOGO MAIOR */
+        .logo img { 
+          height: 60px; 
+          max-height: 70px; 
+          display:block; 
+        }
+        @media (max-width: 768px){
+          .logo img { height: 48px; }
+        }
 
         /* MENU DESKTOP CENTRALIZADO */
         .menu-desktop {
@@ -98,7 +107,7 @@ class CustomNavbar extends HTMLElement {
       <!-- HEADER -->
       <nav>
         <div class="logo">
-          <img src="assets/logo.png" alt="Solene Lopes - Corretora de Saúde e Odonto">
+          <img src="assets/logo2.png" alt="Solene Lopes">
         </div>
 
         <div class="menu-desktop">
