@@ -107,15 +107,19 @@ class CustomNavbar extends HTMLElement {
       <!-- HEADER -->
       <nav>
         <div class="logo">
-          <img src="assets/logo2.png" alt="Solene Lopes">
+            <a href="index.html#inicio">
+                <img src="assets/logo2.png" alt="Solene Lopes">
+            </a>
         </div>
+
 
         <div class="menu-desktop">
           <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#beneficios">Benefícios</a></li>
-            <li><a href="#planos">Planos</a></li>
-            <li><a href="#contato">Contato</a></li>
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#beneficios">Benefícios</a></li>
+            <li><a href="index.html#planos">Planos</a></li>
+            <li><a href="ofertas.html">Ofertas</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
           </ul>
         </div>
 
@@ -130,10 +134,11 @@ class CustomNavbar extends HTMLElement {
       <!-- OVERLAY MOBILE -->
       <div class="overlay" id="overlay">
         <ul class="mobile-list">
-          <li class="mobile-item"><a href="#inicio">Início</a></li>
-          <li class="mobile-item"><a href="#beneficios">Benefícios</a></li>
-          <li class="mobile-item"><a href="#planos">Planos</a></li>
-          <li class="mobile-item"><a href="#contato">Contato</a></li>
+          <li class="mobile-item"><a href="index.html#inicio">Início</a></li>
+          <li class="mobile-item"><a href="index.html#beneficios">Benefícios</a></li>
+          <li class="mobile-item"><a href="index.html#planos">Planos</a></li>
+          <li class="mobile-item"><a href="ofertas.html">Ofertas</a></li>
+          <li class="mobile-item"><a href="index.html#contato">Contato</a></li>
         </ul>
         <a class="mobile-cta" href="https://wa.me/5511962286674" rel="noopener" target="_blank">Falar no WhatsApp</a>
       </div>
